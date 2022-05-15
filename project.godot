@@ -14,6 +14,10 @@ config/name="RiotAPI"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot-riot-api/plugin.cfg" )
+
 [physics]
 
 common/enable_pause_aware_picking=true

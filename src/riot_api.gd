@@ -12,6 +12,12 @@ var API_URL = "https://%s.api.riotgames.com"
 var ENDPOINT_PLATFORM = "/lol/platform/v%s/"
 var ENDPOINT_SUMMONER = "/lol/summoner/v%s/"
 
+var PlatformsDictionary = {
+	"EUNE": "eun1",
+	"EUW": "euw1",
+	"NA": "na1"
+}
+
 func _ready():
 	add_child(http_request)
 	http_request.connect("request_completed", self, "_http_request_completed")
@@ -31,7 +37,20 @@ func _http_request_completed(result, response_code, headers, body):
 			print(data)
 	#+"\nBody: "+body.get_string_from_utf8())
 
+func GetPlatform(region):
+	return PlatformsDictionary[region]
+
 func GetSummonerByName(name, platform):
+	last_request = "GetSummonerByName"
+	var api_call: String = "summoners/by-name/" + name
+	var raw: String = API_URL + ENDPOINT_SUMMONER + api_call
+	var url: String = raw % ["euw1", platform]
+	print(url)
+	var token = "X-Riot-Token:" + key
+	var headers = [token]
+	http_request.request(url, headers, false)
+
+func GetSummonerByAccount(name, platform):
 	last_request = "GetSummonerByName"
 	var api_call: String = "summoners/by-name/" + name
 	var raw: String = API_URL + ENDPOINT_SUMMONER + api_call
@@ -48,4 +67,6 @@ func GetVersion():
 
 
 func _on_Button_pressed():
-	GetSummonerByName("Keeice", 4)
+	var region = GetPlatform("EUW")
+	print(region)
+	#GetSummonerByName("Keeice", 4)
