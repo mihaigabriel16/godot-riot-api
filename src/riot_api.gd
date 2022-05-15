@@ -22,6 +22,9 @@ func _ready():
 	add_child(http_request)
 	http_request.connect("request_completed", self, "_http_request_completed")
 	GetVersion()
+	$OptionButton.add_item("EUW")
+	$OptionButton.add_item("EUNE")
+	
 	
 func request(function):
 	call(function)
@@ -44,7 +47,7 @@ func GetSummonerByName(name, platform):
 	last_request = "GetSummonerByName"
 	var api_call: String = "summoners/by-name/" + name
 	var raw: String = API_URL + ENDPOINT_SUMMONER + api_call
-	var url: String = raw % ["euw1", platform]
+	var url: String = raw % ["eun1", platform]
 	print(url)
 	var token = "X-Riot-Token:" + key
 	var headers = [token]
@@ -67,6 +70,6 @@ func GetVersion():
 
 
 func _on_Button_pressed():
-	var region = GetPlatform("EUW")
-	print(region)
-	#GetSummonerByName("Keeice", 4)
+	var region = GetPlatform($OptionButton.get_item_text($OptionButton.get_selected_id()))
+	#print(region)s
+	GetSummonerByName($TextEdit.text, 4)

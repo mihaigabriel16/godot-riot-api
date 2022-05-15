@@ -12,5 +12,18 @@ margin_left = 408.0
 margin_top = 56.0
 margin_right = 583.0
 margin_bottom = 115.0
+text = "Get Data"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 340.0
+margin_top = 176.0
+margin_right = 640.0
+margin_bottom = 225.0
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 447.0
+margin_top = 263.0
+margin_right = 552.0
+margin_bottom = 298.0
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
